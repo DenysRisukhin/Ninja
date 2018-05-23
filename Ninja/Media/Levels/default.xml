@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level backgroundTexture="Images/background.png" fadeTime="300" defaultDeactivationEvent="0"
+       backgroundSound="Sounds/music.mp3" loopBackgroundSound="true">
+    <activationEvents>
+        <activationEvent value="7"/>
+        <activationEvent value="15"/>
+    </activationEvents>
+  
+    <sounds>
+        <sound type="hit" filename="Sounds/crash.wav"/>
+        <sound type="coin" filename="Sounds/coin.wav"/>
+        <sound type="death" filename="Sounds/damage.wav"/>
+    </sounds>
+  
+    <hud>
+        <coinsCountLabel prefix="       " x="897" y="20" width="400" height="30"
+                         font="Fonts/comic.xml" fontColorRed="255" fontColorGreen="250" fontColorBlue="250"/>
+        <livesCountLabel prefix="       " x="897" y="63" width="400" height="30"
+                         font="Fonts/comic.xml" fontColorRed="238" fontColorGreen="9" fontColorBlue="9"/>
+        <pauseIndicatorLabel prefix="Paused" x="905" y="15" width="400" height="200"
+                             font="Fonts/comic.xml" fontColorRed="238" fontColorGreen="9" fontColorBlue="9"/>
+        <pressAnyKeyIndicatorLabel prefix="Press Any Key" x="420" y="625" width="300" height="200"
+                             font="Fonts/comic.xml" fontColorRed="0" fontColorGreen="0" fontColorBlue="0"/>
+        <controlIndicatorLabel prefix="w / a / s / d - Move the player" x="330" y="20" width="400" height="200"
+                           font="Fonts/comic.xml" fontColorRed="255" fontColorGreen="250" fontColorBlue="250"/>
+        <engineIndicatorLabel prefix="Engine: Errlicht" x="420" y="425" width="400" height="200"
+                           font="Fonts/comic.xml" fontColorRed="255" fontColorGreen="250" fontColorBlue="250"/>
+        <developerIndicatorLabel prefix="Developer: Denys Risukhin" x="360" y="465" width="400" height="200"
+                         font="Fonts/comic.xml" fontColorRed="255" fontColorGreen="250" fontColorBlue="250"/>
+        <pathGameIndicatorLabel prefix="N I N J A" x="435" y="485" width="300" height="200"
+                        font="Fonts/comic.xml" fontColorRed="255" fontColorGreen="250" fontColorBlue="250"/>
+      <minimap x="0" y="0" width="128" height="128" rttWidth="128" rttHeight="128" opacity="0.9"/>
+    </hud>
+  
+    <environment left="Images/lefttron.jpg" right="Images/righttron.jpg"
+                 top="Images/downtron.jpg" bottom="Images/uptron.jpg"
+                 front="Images/fronttron.jpg" back="Images/backtron.jpg"/>
+    <keys>
+        <key type="pause" code="32"/>
+        <key type="abort" code="27"/>
+    </keys>
+  
+    <camera fov="45" near="1" far="10000"/>
+  
+    <board width="16" height="16"
+           model="Models/floor.x" animationSpeed="0" anisotropicFiltering="true">
+        <obstacles model="Models/wall.x" animationSpeed="0" anisotropicFiltering="true">
+            <obstacle position="8"/>
+            <obstacle position="135"/>
+            <obstacle position="18"/>
+            <obstacle position="19"/>
+            <obstacle position="25"/>
+            <obstacle position="78"/>
+            <obstacle position="201"/>
+            <obstacle position="202"/>
+            <obstacle position="203"/>
+            <obstacle position="45"/>
+            <obstacle position="67"/>
+            <obstacle position="100"/>
+            <obstacle position="101"/>
+        </obstacles>
+        <coins model="Models/coin.obj" animationSpeed="6000" anisotropicFiltering="true" rotationSpeed="1">
+            <coin position="70"/>
+            <coin position="133"/>
+            <coin position="200"/>
+            <coin position="212"/>
+            <coin position="120"/>
+            <coin position="5"/>
+            <coin position="55"/>
+            <coin position="233"/>
+        </coins>
+    </board>
+    <mainCharacter model="Models/ninja.b3d" animationSpeed="3000" anisotropicFiltering="true"
+                   position="140" speed="8.1" livesCount="3" invisibilityTime="3000"
+                   controllerId="0"/>
+    <enemies model="Models/ninja.b3d" animationSpeed="3000" anisotropicFiltering="true">
+        <enemy controllerId="1" position="40" speed="3"/>
+      <!--
+        <enemy controllerId="2" position="41" speed="3"/>
+        <enemy controllerId="3" position="42" speed="3"/>
+      -->
+    </enemies>
+    <cameraController>
+        <cameraAngles fi="0" theta="0.04"/>
+        <cameraRadius value="1500" min="100" max="5000"/>
+    </cameraController>
+    <playerMovableController id="0">
+        <control key="87" direction="1"/>
+        <control key="83" direction="2"/>
+        <control key="65" direction="3"/>
+        <control key="68" direction="4"/>
+    </playerMovableController>
+
+    <enemyMovableController id="1"/>
+  <!-- 
+    <randomMovableController id="1" turnProbability="0.3"/>
+    <pursuingMovableController id="2"/>
+    <walkingMovableController id="3" waypointsSetId="0"/>
+  -->
+    <waypoints>
+        <waypoint setId="0" direction="1"/>
+        <waypoint setId="0" direction="1"/>
+        <waypoint setId="0" direction="3"/>
+        <waypoint setId="0" direction="3"/>
+        <waypoint setId="0" direction="2"/>
+        <waypoint setId="0" direction="2"/>
+        <waypoint setId="0" direction="4"/>
+        <waypoint setId="0" direction="4"/>
+    </waypoints>
+</level>

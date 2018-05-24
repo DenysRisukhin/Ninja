@@ -1,7 +1,0 @@
-#pragma once
-
-enum MOVING_CONTROLLER_TYPE
-{
-	EMCT_MANUAL,
-	EMCT_PURSUING
-};

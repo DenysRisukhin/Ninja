@@ -48,7 +48,7 @@ u8 Game::getNumOfEnemies()
 }
 
 // Function to handle user input.
-void Game::processInput(IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver, ITriangleSelector* selector, EventReciever* reciever, Player* player, Camera* camera, f32 deltaTime)
+void Game::processInput(IrrlichtDevice* device, ISceneManager* smgr, IVideoDriver* driver, ITriangleSelector* selector, EventReciever* reciever, Player* player, Camera* camera, f32 deltaTime, ISoundEngine* sound)
 {
 	bool pPressed = false;
 
@@ -89,11 +89,12 @@ void Game::processInput(IrrlichtDevice* device, ISceneManager* smgr, IVideoDrive
 		PowerBall* tempBall = player->Attack();
 		if (tempBall != NULL)
 		{
+			sound->play2D("sounds/lazer.wav", false);
 			updateList.push_back(tempBall);
 		}
 		player->setAttackAnimation();
 	}
-	if (reciever->isKeyDown(KEY_KEY_X))
+	/*if (reciever->isKeyDown(KEY_KEY_X))
 	{
 		pushEnemies(player);
 		player->setAttackAnimation();
@@ -101,17 +102,12 @@ void Game::processInput(IrrlichtDevice* device, ISceneManager* smgr, IVideoDrive
 	if (reciever->isKeyDown(KEY_KEY_C))
 	{
 		player->teleport();
-	}
+	}*/
 
 	if (reciever->isKeyDown(KEY_SPACE)) {
 
-		//player->v = 300;
-
-		//up = true;
-		//counter++;
-
 		player->setJumpAnimation();
-		//engine->play2D("media/sounds/jump.wav", false);
+		
 	}
 
 	if (reciever->isKeyUp(KEY_KEY_X) && reciever->isKeyUp(KEY_KEY_Z) && reciever->isKeyUp(KEY_KEY_W) && reciever->isKeyUp(KEY_KEY_A) && reciever->isKeyUp(KEY_KEY_S) && reciever->isKeyUp(KEY_KEY_D) && !reciever->isKeyDown(KEY_SPACE))
@@ -119,7 +115,6 @@ void Game::processInput(IrrlichtDevice* device, ISceneManager* smgr, IVideoDrive
 		player->setIdleAnimation();
 	}
 
-	
 }
 
 // Function to update position of all GameObjects.
@@ -266,9 +261,10 @@ void Game::handleCollisionWithPlayer(Player* player, Camera* camera, f32 deltaTi
 
 					ptr->remove();
 					ptr = NULL;
-					listCoin.erase(temp);
-					std::cout << "Coin removed.\n";
 
+					listCoin.erase(temp);
+
+					std::cout << "Coin removed.\n";
 				}
 				else {
 					ptr->update(deltaTime);
@@ -773,14 +769,14 @@ void Game::handleGameState(GameState & gameState, Player* player, IrrlichtDevice
 // Function to denote that Game is Over.
 void Game::displayGameOverScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
 {
-	guienv->addImage(driver->getTexture("Textures/GameOver.bmp"), vector2d<s32>(0, 0), false);
+	guienv->addImage(driver->getTexture("Textures/GameOver.jpg"), vector2d<s32>(-195, 0), false);
 	bGameOverDisplayed = true;
 }
 
 // Function to denote completion of game.
 void Game::displayGameCompleteScreen(IVideoDriver* driver, IGUIEnvironment* guienv)
 {
-	guienv->addImage(driver->getTexture("Textures/GameComplete.bmp"), vector2d<s32>(0, 0), false);
+	guienv->addImage(driver->getTexture("Textures/GameComplete.jpg"), vector2d<s32>(-195, 0), false);
 	bGameCompleteDisplayed = true;
 }
 
@@ -1205,11 +1201,11 @@ void Game::displayMainMenu(GameState & gameState, IrrlichtDevice* device)
 
 	skin->setFont(guienv->getBuiltInFont(), EGDF_TOOLTIP);
 
-	guienv->addImage(device->getVideoDriver()->getTexture("Textures/background.png"), vector2d<s32>(0, 0), false);
+	guienv->addImage(device->getVideoDriver()->getTexture("Textures/background.jpg"), vector2d<s32>(-195, 0), false);
 
-	guienv->addButton(rect<s32>(510, 200, 750, 270), NULL, GUI_ID_PLAY_BUTTON, L"Play");
-	guienv->addButton(rect<s32>(510, 300, 750, 370), NULL, GUI_ID_INSTRUCTIONS_BUTTON, L"About");
-	guienv->addButton(rect<s32>(510, 400, 750, 470), NULL, GUI_ID_CONTROLS_BUTTON, L"Controls");
-	guienv->addButton(rect<s32>(510, 500, 750, 570), NULL, GUI_ID_QUIT_BUTTON, L"Exit");
+	guienv->addButton(rect<s32>(380, 200, 620, 270), NULL, GUI_ID_PLAY_BUTTON, L"Play");
+	guienv->addButton(rect<s32>(380, 300, 620, 370), NULL, GUI_ID_INSTRUCTIONS_BUTTON, L"About");
+	guienv->addButton(rect<s32>(380, 400, 620, 470), NULL, GUI_ID_CONTROLS_BUTTON, L"Controls");
+	guienv->addButton(rect<s32>(380, 500, 620, 570), NULL, GUI_ID_QUIT_BUTTON, L"Exit");
 	
 }

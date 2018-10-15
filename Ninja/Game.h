@@ -1,7 +1,7 @@
 #pragma once
 
 #include <irrlicht.h>
-//#include "irrKlang\irrKlang.h"
+#include <irrKlang.h>
 
 #include <iostream>
 #include <time.h>
@@ -23,14 +23,14 @@
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
-//#pragma comment(lib, "irrKlang.lib")
+#pragma comment(lib, "irrKlang.lib")
 #endif
 
 #define DEBUG
 
 using namespace std;
 using namespace irr;
-//using namespace irrklang;
+using namespace irrklang;
 using namespace core;
 using namespace video;
 using namespace scene;
@@ -43,7 +43,7 @@ public:
 	Game();
 
 	// Function to handle user input.
-	void processInput(IrrlichtDevice*, ISceneManager*, IVideoDriver*, ITriangleSelector*, EventReciever*, Player*, Camera*, f32);
+	void processInput(IrrlichtDevice*, ISceneManager*, IVideoDriver*, ITriangleSelector*, EventReciever*, Player*, Camera*, f32, ISoundEngine*);
 	void handleCollisions(Player*, Camera*, f32);
 	void handleCollisionWithPlayer(Player*, Camera*, f32);
 	void handleCollisionEnemyPowerBall(void);

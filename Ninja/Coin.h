@@ -14,7 +14,6 @@
 using namespace irr;
 //using namespace irrklang;
 
-
 class Coin: public GameObject {
 
 public:

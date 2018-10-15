@@ -4,13 +4,23 @@
 int main()
 {
 	// Initializing the engine.
-	IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d<u32>(1264, 768), 32U, false, true);
+	IrrlichtDevice* device = createDevice(EDT_OPENGL, dimension2d<u32>(1024, 768), 32U, false, true);
+	device->setWindowCaption(L"The Ninja");
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
 	// Making instance of our game.
 	Game app;
+
+	ISoundEngine* soundEngine = createIrrKlangDevice();
+	if (!soundEngine) {
+		printf("Could not startup engine\n");
+		return 0; // error starting up the engine
+	}
+
+	// init background
+	soundEngine->play2D("sounds/music.mp3", false);
 
 	// Instantiating game objects.
 	Terrain* terrain = new Terrain(smgr, driver);
@@ -66,7 +76,7 @@ int main()
 		deltaTime = presentTime - previousTime;
 
 		// To pause/unpause the game.
-		if (reciever->isKeyDown(KEY_KEY_P) && (device->getTimer()->getTime() - lastPress) > 2000)
+		if (reciever->isKeyDown(KEY_ESCAPE) && (device->getTimer()->getTime() - lastPress) > 2000)
 		{
 			app.gamePaused = !(app.gamePaused);
 
@@ -87,7 +97,7 @@ int main()
 			app.handleGameState(gameState, player, device, smgr, driver);
 
 			// Function to handle user input.
-			app.processInput(device, smgr, driver, selector, reciever, player, camera, deltaTime);
+			app.processInput(device, smgr, driver, selector, reciever, player, camera, deltaTime, soundEngine);
 
 			// Update Player's Mana.
 			if ((device->getTimer()->getTime() - app.getLastUpdate()) > 1000.0f)

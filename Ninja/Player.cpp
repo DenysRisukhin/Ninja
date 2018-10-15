@@ -11,21 +11,12 @@ Player::Player(IrrlichtDevice* irrDevice, ISceneManager* manager, IVideoDriver* 
 	health = 100;
 	mana = 100;
 
-	//scene::IAnimatedMesh* building_mesh = this->smgr->getMesh("Models/ninja.b3d");
-	/*this->node = this->smgr->addAnimatedMeshSceneNode(building_mesh);
-	if (building_mesh == NULL) {
-		printf("Nu putem incarca mesh-ul de player\n");
-		exit(-1);
-	}*/
-
-	//this->node->setMaterialTexture(0, driver->getTexture("Models/nskinrd.jpg"));
-
 	mesh = smgr->getMesh("Models/ninja.b3d");
 	node = smgr->addAnimatedMeshSceneNode(mesh);
 	node->setMaterialTexture(0, driver->getTexture("Models/nskinbl.jpg"));
 	node->setMaterialFlag(EMF_LIGHTING, false);
 	node->setPosition(vector3df(600, 60, 600));
-	//node->setRotation(vector3df(0, -90, 0));
+
 	node->addShadowVolumeSceneNode();
 
 	node->setScale(core::vector3df(6, 6, 6));
